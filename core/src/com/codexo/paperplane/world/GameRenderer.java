@@ -10,7 +10,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.objects.Grass;
 import com.codexo.paperplane.objects.PaperPlane;
+import com.codexo.paperplane.objects.Pipe;
+import com.codexo.paperplane.objects.ScrollHandler;
 
 public class GameRenderer {
     private GameWorld world;
@@ -22,6 +25,9 @@ public class GameRenderer {
     private int gameHeight;
 
     private PaperPlane paperPlane;
+    private ScrollHandler scroller;
+    private Grass frontGrass, backGrass;
+    private Pipe pipe1, pipe2, pipe3;
 
     private TextureRegion bg, grass;
     private Animation paperPlaneAnim;
@@ -68,6 +74,14 @@ public class GameRenderer {
         batch.disableBlending();
         batch.draw(bg, 0, midPointY + 23, 136, 43);
 
+        // Draw Grass
+        drawGrass();
+        // Draw Pipes
+        drawPipes();
+        batch.enableBlending();
+        // Draw Skulls (requires transparency)
+        drawSkulls();
+
         batch.enableBlending();
         if (paperPlane.shouldntFlap()) {
             batch.draw(paperPlaneMid, paperPlane.getX(), paperPlane.getY(),
@@ -82,8 +96,56 @@ public class GameRenderer {
         batch.end();
     }
 
+    private void drawGrass() {
+        // Draw the grass
+        batch.draw(grass, frontGrass.getX(), frontGrass.getY(),
+                frontGrass.getWidth(), frontGrass.getHeight());
+        batch.draw(grass, backGrass.getX(), backGrass.getY(),
+                backGrass.getWidth(), backGrass.getHeight());
+    }
+
+    private void drawSkulls() {
+        batch.draw(skullUp, pipe1.getX() - 1,
+                pipe1.getY() + pipe1.getHeight() - 14, 24, 14);
+        batch.draw(skullDown, pipe1.getX() - 1,
+                pipe1.getY() + pipe1.getHeight() + 45, 24, 14);
+
+        batch.draw(skullUp, pipe2.getX() - 1,
+                pipe2.getY() + pipe2.getHeight() - 14, 24, 14);
+        batch.draw(skullDown, pipe2.getX() - 1,
+                pipe2.getY() + pipe2.getHeight() + 45, 24, 14);
+
+        batch.draw(skullUp, pipe3.getX() - 1,
+                pipe3.getY() + pipe3.getHeight() - 14, 24, 14);
+        batch.draw(skullDown, pipe3.getX() - 1,
+                pipe3.getY() + pipe3.getHeight() + 45, 24, 14);
+    }
+
+    private void drawPipes() {
+        batch.draw(bar, pipe1.getX(), pipe1.getY(), pipe1.getWidth(),
+                pipe1.getHeight());
+        batch.draw(bar, pipe1.getX(), pipe1.getY() + pipe1.getHeight() + 45,
+                pipe1.getWidth(), midPointY + 66 - (pipe1.getHeight() + 45));
+
+        batch.draw(bar, pipe2.getX(), pipe2.getY(), pipe2.getWidth(),
+                pipe2.getHeight());
+        batch.draw(bar, pipe2.getX(), pipe2.getY() + pipe2.getHeight() + 45,
+                pipe2.getWidth(), midPointY + 66 - (pipe2.getHeight() + 45));
+
+        batch.draw(bar, pipe3.getX(), pipe3.getY(), pipe3.getWidth(),
+                pipe3.getHeight());
+        batch.draw(bar, pipe3.getX(), pipe3.getY() + pipe3.getHeight() + 45,
+                pipe3.getWidth(), midPointY + 66 - (pipe3.getHeight() + 45));
+    }
+
     private void initGameObjects() {
         paperPlane = world.getPaperPlane();
+        scroller = world.getScroller();
+        frontGrass = scroller.getFrontGrass();
+        backGrass = scroller.getBackGrass();
+        pipe1 = scroller.getPipe1();
+        pipe2 = scroller.getPipe2();
+        pipe3 = scroller.getPipe3();
     }
 
     private void initAssets() {
