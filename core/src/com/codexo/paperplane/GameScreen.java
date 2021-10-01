@@ -10,9 +10,11 @@ import com.codexo.paperplane.world.GameWorld;
 public class GameScreen implements Screen {
     private GameWorld world;
     private GameRenderer renderer;
+    public float runTime;
 
     public GameScreen() {
         Gdx.app.log("GameScreen", "Attached");
+        runTime = 0;
 
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
@@ -22,7 +24,7 @@ public class GameScreen implements Screen {
         int midPointY = (int) (gameHeight / 2);
 
         world = new GameWorld(midPointY);
-        renderer = new GameRenderer(world);
+        renderer = new GameRenderer(world, (int) gameHeight, midPointY);
 
         Gdx.input.setInputProcessor(new InputHandler(world.getPaperPlane()));
     }
@@ -30,8 +32,9 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         //Gdx.app.log("GameScreen FPS", (1 / delta) + " ");
+        runTime += delta;
         world.update(delta);
-        renderer.render();
+        renderer.render(runTime);
     }
 
     @Override
