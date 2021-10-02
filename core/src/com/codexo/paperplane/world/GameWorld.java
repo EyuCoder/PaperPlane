@@ -1,6 +1,5 @@
 package com.codexo.paperplane.world;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.codexo.paperplane.helpers.AssetLoader;
@@ -93,8 +92,8 @@ public class GameWorld {
         return score;
     }
 
-    public void addScore(int increment) {
-        score += increment;
+    public void addScore() {
+        score++;
     }
 
     public boolean isReady() {

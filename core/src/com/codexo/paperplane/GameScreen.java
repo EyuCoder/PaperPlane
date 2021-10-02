@@ -2,7 +2,6 @@ package com.codexo.paperplane;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.codexo.paperplane.helpers.InputHandler;
 import com.codexo.paperplane.world.GameRenderer;
 import com.codexo.paperplane.world.GameWorld;

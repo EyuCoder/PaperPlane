@@ -5,13 +5,12 @@ import com.codexo.paperplane.objects.PaperPlane;
 import com.codexo.paperplane.world.GameWorld;
 
 public class InputHandler implements InputProcessor {
-    private PaperPlane paperPlane;
-    private GameWorld gameWorld;
+    private final PaperPlane paperPlane;
+    private final GameWorld gameWorld;
 
-    public InputHandler(GameWorld myWorld) {
-        // myBird now represents the gameWorld's bird.
-        this.gameWorld = myWorld;
-        paperPlane = myWorld.getPaperPlane();
+    public InputHandler(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
+        paperPlane = gameWorld.getPaperPlane();
     }
 
     @Override

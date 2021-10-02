@@ -36,9 +36,9 @@ public class Pipe extends Scrollable {
         barDown.set(position.x, position.y + height + VERTICAL_GAP, width,
                 groundY - (position.y + height + VERTICAL_GAP));
 
-        skullUp.set(position.x - (SKULL_WIDTH - width) / 2, position.y + height
+        skullUp.set(position.x - (SKULL_WIDTH - width) / 2f, position.y + height
                 - SKULL_HEIGHT, SKULL_WIDTH, SKULL_HEIGHT);
-        skullDown.set(position.x - (SKULL_WIDTH - width) / 2, barDown.y,
+        skullDown.set(position.x - (SKULL_WIDTH - width) / 2f, barDown.y,
                 SKULL_WIDTH, SKULL_HEIGHT);
     }
 
@@ -81,7 +81,7 @@ public class Pipe extends Scrollable {
     }
 
     public boolean isScored() {
-        return isScored;
+        return !isScored;
     }
 
     public void setScored(boolean scored) {

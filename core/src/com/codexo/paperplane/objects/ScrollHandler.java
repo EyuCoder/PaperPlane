@@ -57,23 +57,23 @@ public class ScrollHandler {
     }
 
     public boolean collides(PaperPlane paperPlane) {
-        if (!pipe1.isScored()
-                && pipe1.getX() + (pipe1.getWidth() / 2) < paperPlane.getX()
+        if (pipe1.isScored()
+                && pipe1.getX() + (pipe1.getWidth() / 2f) < paperPlane.getX()
                 + paperPlane.getWidth()) {
-            addScore(1);
+            addScore();
             pipe1.setScored(true);
             AssetLoader.coin.play();
-        } else if (!pipe2.isScored()
-                && pipe2.getX() + (pipe2.getWidth() / 2) < paperPlane.getX()
+        } else if (pipe2.isScored()
+                && pipe2.getX() + (pipe2.getWidth() / 2f) < paperPlane.getX()
                 + paperPlane.getWidth()) {
-            addScore(1);
+            addScore();
             pipe2.setScored(true);
             AssetLoader.coin.play();
 
-        } else if (!pipe3.isScored()
-                && pipe3.getX() + (pipe3.getWidth() / 2) < paperPlane.getX()
+        } else if (pipe3.isScored()
+                && pipe3.getX() + (pipe3.getWidth() / 2f) < paperPlane.getX()
                 + paperPlane.getWidth()) {
-            addScore(1);
+            addScore();
             pipe3.setScored(true);
             AssetLoader.coin.play();
 
@@ -82,8 +82,8 @@ public class ScrollHandler {
                 .collides(paperPlane));
     }
 
-    private void addScore(int increment) {
-        gameWorld.addScore(increment);
+    private void addScore() {
+        gameWorld.addScore();
     }
 
     public void onRestart() {

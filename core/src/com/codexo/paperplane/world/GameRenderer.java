@@ -1,9 +1,6 @@
 package com.codexo.paperplane.world;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -105,10 +102,10 @@ public class GameRenderer {
 
         if (world.isReady()) {
             // Draw shadow first
-            AssetLoader.shadow.draw(batch, "Touch me", (136 / 2) - (42), 76);
+            AssetLoader.shadow.draw(batch, "Touch me", (136 / 2f) - (42), 76);
             // Draw text
             AssetLoader.font
-                    .draw(batch, "Touch me", (136 / 2) - (42 - 1), 75);
+                    .draw(batch, "Touch me", (136 / 2f) - (42 - 1), 75);
         } else {
 
             if (world.isGameOver() || world.isHighScore()) {
@@ -123,10 +120,10 @@ public class GameRenderer {
                     String highScore = AssetLoader.getHighScore() + "";
 
                     // Draw shadow first
-                    AssetLoader.shadow.draw(batch, highScore, (136 / 2)
+                    AssetLoader.shadow.draw(batch, highScore, (136 / 2f)
                             - (3 * highScore.length()), 128);
                     // Draw text
-                    AssetLoader.font.draw(batch, highScore, (136 / 2)
+                    AssetLoader.font.draw(batch, highScore, (136 / 2f)
                             - (3 * highScore.length() - 1), 127);
                 } else {
                     AssetLoader.shadow.draw(batch, "High Score!", 19, 56);
@@ -141,10 +138,10 @@ public class GameRenderer {
 
                 // Draw shadow first
                 AssetLoader.shadow.draw(batch, score,
-                        (136 / 2) - (3 * score.length()), 12);
+                        (136 / 2f) - (3 * score.length()), 12);
                 // Draw text
                 AssetLoader.font.draw(batch, score,
-                        (136 / 2) - (3 * score.length() - 1), 11);
+                        (136 / 2f) - (3 * score.length() - 1), 11);
 
             }
 
@@ -152,10 +149,10 @@ public class GameRenderer {
             String score = world.getScore() + "";
 
             // Draw shadow first
-            AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2)
+            AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2f)
                     - (3 * score.length()), 12);
             // Draw text
-            AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2)
+            AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2f)
                     - (3 * score.length() - 1), 11);
 
         }

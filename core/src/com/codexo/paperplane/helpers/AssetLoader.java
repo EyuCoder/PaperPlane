@@ -10,10 +10,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetLoader {
-    public static Texture texture;
-    public static TextureRegion bg, grass;
+    public static Texture texture, logoTexture;
+    public static TextureRegion bg, grass,logo, gameLogo,playButtonUp, playButtonDown;
 
-    public static Animation paperPlaneAnim;
+    public static Animation<TextureRegion> paperPlaneAnim;
     public static TextureRegion paperPlane, paperPlaneDown, paperPlaneUp;
 
     public static TextureRegion skullUp, skullDown, bar;
@@ -25,8 +25,22 @@ public class AssetLoader {
     private static Preferences prefs;
 
     public static void load() {
+        logoTexture = new Texture(Gdx.files.internal("data/logo.png"));
+        logoTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+
+        logo = new TextureRegion(logoTexture, 0, 0, 512, 114);
+
         texture = new Texture(Gdx.files.internal("data/texture.png"));
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
+
+        playButtonUp = new TextureRegion(texture, 0, 83, 29, 16);
+        playButtonDown = new TextureRegion(texture, 29, 83, 29, 16);
+        playButtonUp.flip(false, true);
+        playButtonDown.flip(false, true);
+
+        gameLogo = new TextureRegion(texture, 0, 55, 135, 24);
+        gameLogo.flip(false, true);
+
 
         bg = new TextureRegion(texture, 0, 0, 136, 43);
         bg.flip(false, true);
@@ -44,7 +58,7 @@ public class AssetLoader {
         paperPlaneUp.flip(false, true);
 
         TextureRegion[] paperPlanes = {paperPlaneDown, paperPlane, paperPlaneUp};
-        paperPlaneAnim = new Animation(0.06f, paperPlanes);
+        paperPlaneAnim = new Animation<>(0.06f, paperPlanes);
         paperPlaneAnim.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         skullUp = new TextureRegion(texture, 192, 0, 24, 14);
