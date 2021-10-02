@@ -56,11 +56,12 @@ public class GameRenderer {
     }
 
     public void render(float runTime) {
-//        Gdx.app.log("GameRenderer", "render");
+
         ScreenUtils.clear(0, 0, 0, 1);
 
         shapeRenderer.begin(ShapeType.Filled);
-        // Draw Background
+
+        // Draw Background color
         shapeRenderer.setColor(55 / 255.0f, 80 / 255.0f, 100 / 255.0f, 1);
         shapeRenderer.rect(0, 0, 136, midPointY + 66);
 
@@ -71,42 +72,96 @@ public class GameRenderer {
         // Draw Dirt
         shapeRenderer.setColor(147 / 255.0f, 80 / 255.0f, 27 / 255.0f, 1);
         shapeRenderer.rect(0, midPointY + 77, 136, 52);
+
         shapeRenderer.end();
 
         batch.begin();
         batch.disableBlending();
         batch.draw(bg, 0, midPointY + 23, 136, 43);
 
-        // Draw Grass
+        // 1. Draw Grass
         drawGrass();
-        // Draw Pipes
+
+        // 2. Draw Pipes
         drawPipes();
         batch.enableBlending();
-        // Draw Skulls (requires transparency)
+
+        // 3. Draw Skulls (requires transparency)
         drawSkulls();
 
-        batch.enableBlending();
         if (paperPlane.shouldntFlap()) {
             batch.draw(paperPlaneMid, paperPlane.getX(), paperPlane.getY(),
                     paperPlane.getWidth() / 2.0f, paperPlane.getHeight() / 2.0f,
                     paperPlane.getWidth(), paperPlane.getHeight(), 1, 1, paperPlane.getRotation());
+
         } else {
             batch.draw((TextureRegion) paperPlaneAnim.getKeyFrame(runTime), paperPlane.getX(),
                     paperPlane.getY(), paperPlane.getWidth() / 2.0f,
                     paperPlane.getHeight() / 2.0f, paperPlane.getWidth(), paperPlane.getHeight(),
                     1, 1, paperPlane.getRotation());
         }
-        // Convert integer into String
-        String score = world.getScore() + "";
 
-        // Draw shadow first
-        AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2)
-                - (3 * score.length()), 12);
-        // Draw text
-        AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2)
-                - (3 * score.length() - 1), 11);
+        // TEMPORARY CODE! We will fix this section later:
+
+        if (world.isReady()) {
+            // Draw shadow first
+            AssetLoader.shadow.draw(batch, "Touch me", (136 / 2) - (42), 76);
+            // Draw text
+            AssetLoader.font
+                    .draw(batch, "Touch me", (136 / 2) - (42 - 1), 75);
+        } else {
+
+            if (world.isGameOver() || world.isHighScore()) {
+
+                if (world.isGameOver()) {
+                    AssetLoader.shadow.draw(batch, "Game Over", 25, 56);
+                    AssetLoader.font.draw(batch, "Game Over", 24, 55);
+
+                    AssetLoader.shadow.draw(batch, "High Score:", 23, 106);
+                    AssetLoader.font.draw(batch, "High Score:", 22, 105);
+
+                    String highScore = AssetLoader.getHighScore() + "";
+
+                    // Draw shadow first
+                    AssetLoader.shadow.draw(batch, highScore, (136 / 2)
+                            - (3 * highScore.length()), 128);
+                    // Draw text
+                    AssetLoader.font.draw(batch, highScore, (136 / 2)
+                            - (3 * highScore.length() - 1), 127);
+                } else {
+                    AssetLoader.shadow.draw(batch, "High Score!", 19, 56);
+                    AssetLoader.font.draw(batch, "High Score!", 18, 55);
+                }
+
+                AssetLoader.shadow.draw(batch, "Try again?", 23, 76);
+                AssetLoader.font.draw(batch, "Try again?", 24, 75);
+
+                // Convert integer into String
+                String score = world.getScore() + "";
+
+                // Draw shadow first
+                AssetLoader.shadow.draw(batch, score,
+                        (136 / 2) - (3 * score.length()), 12);
+                // Draw text
+                AssetLoader.font.draw(batch, score,
+                        (136 / 2) - (3 * score.length() - 1), 11);
+
+            }
+
+            // Convert integer into String
+            String score = world.getScore() + "";
+
+            // Draw shadow first
+            AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2)
+                    - (3 * score.length()), 12);
+            // Draw text
+            AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2)
+                    - (3 * score.length() - 1), 11);
+
+        }
 
         batch.end();
+
     }
 
     private void drawGrass() {

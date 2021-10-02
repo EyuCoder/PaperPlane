@@ -2,17 +2,32 @@ package com.codexo.paperplane.helpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.codexo.paperplane.objects.PaperPlane;
+import com.codexo.paperplane.world.GameWorld;
 
 public class InputHandler implements InputProcessor {
     private PaperPlane paperPlane;
+    private GameWorld gameWorld;
 
-    public InputHandler(PaperPlane paperPlane){
-        this.paperPlane = paperPlane;
+    public InputHandler(GameWorld myWorld) {
+        // myBird now represents the gameWorld's bird.
+        this.gameWorld = myWorld;
+        paperPlane = myWorld.getPaperPlane();
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        if (gameWorld.isReady()) {
+            gameWorld.start();
+        }
+
         paperPlane.onClick();
+
+        if (gameWorld.isGameOver()|| gameWorld.isHighScore()) {
+            // Reset all variables, go to GameState.READ
+            gameWorld.restart();
+        }
+
         return true;
     }
 

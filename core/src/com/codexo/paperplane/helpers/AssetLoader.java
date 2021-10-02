@@ -1,6 +1,7 @@
 package com.codexo.paperplane.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
@@ -20,6 +21,8 @@ public class AssetLoader {
     public static Sound dead, flap, coin;
 
     public static BitmapFont font, shadow;
+
+    private static Preferences prefs;
 
     public static void load() {
         texture = new Texture(Gdx.files.internal("data/texture.png"));
@@ -60,6 +63,21 @@ public class AssetLoader {
         font.getData().setScale(.25f, -.25f);
         shadow = new BitmapFont(Gdx.files.internal("font/shadow.fnt"));
         shadow.getData().setScale(.25f, -.25f);
+
+        prefs = Gdx.app.getPreferences("PaperPlane");
+        if (!prefs.contains("highScore")){
+            prefs.putInteger("highScore", 0);
+            prefs.flush();
+        }
+    }
+
+    public static void setHighScore(int val){
+        prefs.putInteger("highScore", val);
+        prefs.flush();
+    }
+
+    public static int getHighScore(){
+        return prefs.getInteger("highScore");
     }
 
     public static void dispose() {
