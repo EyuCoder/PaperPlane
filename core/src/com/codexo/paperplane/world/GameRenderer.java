@@ -1,6 +1,7 @@
 package com.codexo.paperplane.world;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -24,11 +25,13 @@ public class GameRenderer {
     private int midPointY;
     private int gameHeight;
 
+    //Game Objects
     private PaperPlane paperPlane;
     private ScrollHandler scroller;
     private Grass frontGrass, backGrass;
     private Pipe pipe1, pipe2, pipe3;
 
+    //Game Assets
     private TextureRegion bg, grass;
     private Animation paperPlaneAnim;
     private TextureRegion paperPlaneMid, paperPlaneDown, paperPlaneUp;
