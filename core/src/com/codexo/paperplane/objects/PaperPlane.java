@@ -2,6 +2,7 @@ package com.codexo.paperplane.objects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.codexo.paperplane.helpers.AssetLoader;
 
 public class PaperPlane {
     private Vector2 position;
@@ -12,6 +13,8 @@ public class PaperPlane {
     private int width;
     private int height;
 
+    private boolean isAlive;
+
     private Circle boundingCircle;
 
     public PaperPlane(float x, float y, int width, int height) {
@@ -21,6 +24,7 @@ public class PaperPlane {
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 460);
         boundingCircle = new Circle();
+        isAlive = true;
     }
 
     public void update(float delta) {
@@ -54,11 +58,23 @@ public class PaperPlane {
     }
 
     public boolean shouldntFlap() {
-        return velocity.y > 70;
+        return velocity.y > 70 || !isAlive;
     }
 
     public void onClick() {
-        velocity.y = -140;
+        if (isAlive) {
+            AssetLoader.flap.play();
+            velocity.y = -140;
+        }
+    }
+
+    public void die(){
+        isAlive = false;
+        velocity.y = 0;
+    }
+
+    public void decelerate(){
+        acceleration.y = 0;
     }
 
     public float getX() {
@@ -83,5 +99,9 @@ public class PaperPlane {
 
     public Circle getBoundingCircle() {
         return boundingCircle;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 }

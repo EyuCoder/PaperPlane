@@ -96,6 +96,16 @@ public class GameRenderer {
                     paperPlane.getHeight() / 2.0f, paperPlane.getWidth(), paperPlane.getHeight(),
                     1, 1, paperPlane.getRotation());
         }
+        // Convert integer into String
+        String score = world.getScore() + "";
+
+        // Draw shadow first
+        AssetLoader.shadow.draw(batch, "" + world.getScore(), (136 / 2)
+                - (3 * score.length()), 12);
+        // Draw text
+        AssetLoader.font.draw(batch, "" + world.getScore(), (136 / 2)
+                - (3 * score.length() - 1), 11);
+
         batch.end();
     }
 
