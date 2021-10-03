@@ -1,4 +1,4 @@
-package com.codexo.paperplane.helpers;
+package com.codexo.paperplane.utils;
 
 import com.badlogic.gdx.InputProcessor;
 import com.codexo.paperplane.objects.PaperPlane;

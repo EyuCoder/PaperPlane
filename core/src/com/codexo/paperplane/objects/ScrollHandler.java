@@ -1,6 +1,6 @@
 package com.codexo.paperplane.objects;
 
-import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.utils.AssetLoader;
 import com.codexo.paperplane.world.GameWorld;
 
 public class ScrollHandler {

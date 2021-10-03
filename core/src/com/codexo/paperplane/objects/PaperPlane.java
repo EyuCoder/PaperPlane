@@ -2,7 +2,7 @@ package com.codexo.paperplane.objects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.utils.AssetLoader;
 
 public class PaperPlane {
     private Vector2 position;

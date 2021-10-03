@@ -122,6 +122,6 @@ project(":core") {
             TexturePacker.process("${rootProject.getRootDir()}/core/rawAssets/sprites", "${rootProject.getRootDir()}/android/assets/images", "paperplane.pack")
         }
 
-        project.tasks.compileJava.dependsOn packTextures
+        //project.tasks.compileJava.dependsOn packTextures
     }
 }

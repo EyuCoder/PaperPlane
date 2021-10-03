@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.codexo.paperplane.GameScreen;
 import com.codexo.paperplane.PaperPlaneGame;
-import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.utils.AssetLoader;
 
 public class SplashScreen implements Screen {
     private SpriteBatch batch;
@@ -20,7 +20,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
-        sprite = new Sprite(AssetLoader.logo);
+        sprite = new Sprite(AssetLoader.instance.platformAssets.logo);
         sprite.setColor(1, 1, 1, 0);
 
         float width = Gdx.graphics.getWidth();

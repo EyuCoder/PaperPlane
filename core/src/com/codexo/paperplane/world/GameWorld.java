@@ -2,7 +2,7 @@ package com.codexo.paperplane.world;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.utils.AssetLoader;
 import com.codexo.paperplane.objects.PaperPlane;
 import com.codexo.paperplane.objects.ScrollHandler;
 

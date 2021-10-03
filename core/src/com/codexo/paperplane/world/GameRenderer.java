@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.codexo.paperplane.helpers.AssetLoader;
+import com.codexo.paperplane.utils.AssetLoader;
 import com.codexo.paperplane.objects.Grass;
 import com.codexo.paperplane.objects.PaperPlane;
 import com.codexo.paperplane.objects.Pipe;
@@ -74,7 +74,7 @@ public class GameRenderer {
 
         batch.begin();
         batch.disableBlending();
-        batch.draw(bg, 0, midPointY + 23, 136, 43);
+        batch.draw(bg, 0, 0, 136, 208);
 
         // 1. Draw Grass
         drawGrass();
@@ -214,14 +214,14 @@ public class GameRenderer {
     }
 
     private void initAssets() {
-        bg = AssetLoader.bg;
-        grass = AssetLoader.grass;
-        paperPlaneAnim = AssetLoader.paperPlaneAnim;
-        paperPlaneMid = AssetLoader.paperPlane;
-        paperPlaneDown = AssetLoader.paperPlaneDown;
-        paperPlaneUp = AssetLoader.paperPlaneUp;
-        skullUp = AssetLoader.skullUp;
-        skullDown = AssetLoader.skullDown;
-        bar = AssetLoader.bar;
+        bg = AssetLoader.instance.platformAssets.bg;
+        grass = AssetLoader.instance.platformAssets.grass;
+        paperPlaneAnim = AssetLoader.instance.paperPlaneAssets.paperPlaneAnim;
+        paperPlaneMid = AssetLoader.instance.paperPlaneAssets.paperPlane;
+        paperPlaneDown = AssetLoader.instance.paperPlaneAssets.paperPlaneDown;
+        paperPlaneUp = AssetLoader.instance.paperPlaneAssets.paperPlaneUp;
+        skullUp = AssetLoader.instance.platformAssets.skullUp;
+        skullDown = AssetLoader.instance.platformAssets.skullDown;
+        bar = AssetLoader.instance.platformAssets.bar;
     }
 }
