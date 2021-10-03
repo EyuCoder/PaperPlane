@@ -1,6 +1,5 @@
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
 buildscript {
-    
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -13,8 +12,8 @@ buildscript {
         classpath 'org.gretty:gretty:3.0.2'
         classpath 'com.android.tools.build:gradle:3.5.4'
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.12'
-        
 
+        classpath "com.badlogicgames.gdx:gdx-tools:1.10.0"
     }
 }
 
@@ -107,7 +106,22 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
-//        implementation "org.mini2Dx:universal-tween-engine:6.3.3"
-        
+    }
+
+    task packTextures {
+        def pack = new File("${rootProject.getRootDir()}/android/assets/images/paperplane.pack.png")
+        def atlas = new File("${rootProject.getRootDir()}/android/assets/images/paperplane.pack.atlas")
+
+        inputs.dir "${rootProject.getRootDir()}/core/rawAssets/sprites"
+        outputs.file "${rootProject.getRootDir()}/android/assets/images/paperplane.pack.png"
+        outputs.file "${rootProject.getRootDir()}/android/assets/images/paperplane.pack.atlas"
+
+        doLast {
+            pack.delete()
+            atlas.delete()
+            TexturePacker.process("${rootProject.getRootDir()}/core/rawAssets/sprites", "${rootProject.getRootDir()}/android/assets/images", "paperplane.pack")
+        }
+
+        project.tasks.compileJava.dependsOn packTextures
     }
 }
